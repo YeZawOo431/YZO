@@ -1,0 +1,6 @@
+Git Commands
+
+Configures the user
+git config --global user.name "Ye Zaw Oo"
+git config --global user.email "yezawoo.cp.431@gmail.com"
+

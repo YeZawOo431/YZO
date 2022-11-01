@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_yzo_school_model,yzo.school.model,model_yzo_school_model,,1,1,1,1
+access_yzo_subj_model,yzo.subj.model,model_yzo_subj_model,,1,1,1,1
+access_yzo_exam_model,yzo.exam.model,model_yzo_exam_model,,1,1,1,1
+access_yzo_exam_line,yzo.exam.line,model_yzo_exam_line,,1,1,1,1
+access_exam_report_wizard,exam.report.wizard,model_exam_report_wizard,,1,1,1,1

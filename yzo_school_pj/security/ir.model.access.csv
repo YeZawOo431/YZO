@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_school_pj,school.pj,model_school_pj,,1,1,1,1
+access_section_pj,section.pj,model_section_pj,,1,1,1,1
+access_section_line,section.line,model_section_line,,1,1,1,1
+access_school_question,school.question,model_school_question,,1,1,1,1
+access_school_major,school.major,model_school_major,,1,1,1,1
+access_question_line,question.line,model_question_line,,1,1,1,1
+access_school_exam,school.exam,model_school_exam,,1,1,1,1
+access_exam_line,exam.line,model_exam_line,,1,1,1,1
+access_school_attendance,school.attendance,model_school_attendance,,1,1,1,1
+access_school_attendance_line,school.attendance.line,model_school_attendance_line,,1,1,1,1
+access_school_rollcall,school.rollcall,model_school_rollcall,,1,1,1,1
+access_rollcall_line,rollcall.line,model_rollcall_line,,1,1,1,1
+

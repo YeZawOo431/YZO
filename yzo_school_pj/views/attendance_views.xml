@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="school_attendance_report_view_tree" model="ir.ui.view">
+        <field name="name">school.attendance.report.view.tree</field>
+        <field name="model">school.attendance</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="section_name" />
+                <field name="monthly" />
+                <!-- <field name="attendance_line_ids" /> -->
+                <field name="attendance_line_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="school_attendance_report_view_form" model="ir.ui.view">
+        <field name="name">school.attendance.report.view.form</field>
+        <field name="model">school.attendance</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="section_name" />
+                        </group>
+                        <group>
+                            <field name="monthly" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Student Record">
+                            <field name="attendance_line_ids" >
+                                <tree>
+                                    <field name="roll_no" />
+                                    <field name="student_name" />
+                                    <field name="total_attendances" />
+                                    <field name="rollcall_percent" widget="percentage"/>
+                                    <field name="for_exam" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="attendance_action" model="ir.actions.act_window">
+        <field name="name">Monthly Report</field>
+        <field name="res_model">school.attendance</field>
+        <field name="view_mode">tree,form</field>
+        <!-- <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            
+        </field> -->
+    </record>
+
+    <menuitem
+        id="attendance_menu"
+        name="Attendance"
+        parent="menu_school_root"
+        sequence="10"/>
+        <menuitem
+            id="attendance_record_menu"
+            name="Monthly Report"
+            action="attendance_action"
+            parent="attendance_menu"
+            sequence="20"/>
+        
+
+</odoo>

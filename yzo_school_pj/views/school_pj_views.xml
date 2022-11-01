@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Tree View-->
+    <record id="view_school_pj_tree" model="ir.ui.view">
+        <field name="name">School Tree</field>
+        <field name="model">school.pj</field>
+        <field name="arch" type="xml">
+            <tree string="" expand="0">
+                <field name="name" />
+                <field name="date_of_birth" />
+                <field name="gender" />
+                <field name="phone_no" optional="hide" />
+                <field name="address" />
+                <field name="role" />
+            </tree>
+        </field>
+    </record>
+
+    <!--Form View-->
+    <record id="view_school_pj_form" model="ir.ui.view">
+        <field name="name">school.pj.view.form</field>
+        <field name="model">school.pj</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="avatar" widget="image" class="oe_avatar oe_left"/>
+                            <!-- <field name="roll_no" attrs="{'invisible':[('role','=','teacher')]}"/> -->
+                            <field name="name" required="True" /> 
+                            <field name="gender" widget="radio" options="{'horizontal': true}"/>   
+                        </group> 
+                        <group>
+                            <field name="father_name" 
+                            attrs="{'invisible':[('role','=','teacher')]}" />
+                            <field name="date_of_birth" />
+                            <field name="phone_no" required="True" />
+                            <field name="address" />                          
+                        </group> 
+                        <group>
+                            <field name="role" widget="selection" required="True" />
+                            <field name="teacher_role" widget="radio" attrs="{'invisible':[('role','=','student')]}" /> 
+                        </group> 
+                    </group>   
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--Action-->
+    <record id="action_slist" model="ir.actions.act_window">
+        <field name="name">Students</field>
+        <field name="res_model">school.pj</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('role','=','student')]</field>
+            
+    </record>
+
+    <record id="action_tlist" model="ir.actions.act_window">
+        <field name="name">Teachers</field>
+        <field name="res_model">school.pj</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('role','=','teacher')]</field>
+        
+    </record>
+  
+    <record id="action_school" model="ir.actions.act_window">
+        <field name="name">Student or Teacher?</field>
+        <field name="res_model">school.pj</field>
+        <field name="view_mode">tree,form</field>
+
+    </record>
+
+    <!--Menu-->
+    <menuitem
+        id="menu_school_root"
+        name="School"
+        sequence="9"/>
+        <menuitem
+            id="menu_school"
+            name="School"
+            parent="menu_school_root"
+            sequence="9"/>
+        <menuitem
+            id="menu_campus"
+            name="Campus"
+            action="action_school"
+            parent="menu_school"
+            sequence="10"/>
+        <menuitem
+            id="menu_tlist"
+            name="Teachers"
+            action="action_tlist"
+            parent="menu_campus"
+            sequence="10"/>
+        <menuitem
+            id="menu_slist"
+            name="Students"
+            action="action_slist"
+            parent="menu_campus"
+            sequence="10"/>
+        
+        
+
+</odoo>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!--Kanban View-->
+    <record id="school_model_view_kanban" model="ir.ui.view">
+        <field name="name">Kanban View</field>
+        <field name="model">yzo.school.model</field>
+        <field name="arch" type="xml">
+            <kanban>
+            <field name="id" />
+            <field name="avatar"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div>
+                            <div class="o_kanban_image">
+                                <img alt="Photo" 
+                                t-att-src="kanban_image('yzo.school.model', 'avatar',record.id.raw_value)"/>
+                            </div>
+                            <div class="oe_kanban_details">
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+                                <div>
+                                    <field name="phone_no" />
+                                </div>
+                                <div>
+                                    <field name="role" />
+                                </div>
+                            </div>  
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!--Pivot-->
+    <record id="school_model_view_pivot" model="ir.ui.view">
+        <field name="name">Pivot View</field>
+        <field name="model">yzo.school.model</field>
+        <field name="arch" type="xml">
+            <pivot string="" disable_linking="true">
+                
+            </pivot>
+        </field>
+    </record>
+
+    <!--Graph View-->
+    <record id="school_model_view_graph" model="ir.ui.view">
+        <field name="name">Graph View</field>
+        <field name="model">yzo.school.model</field>
+        <field name="arch" type="xml">
+            <graph string="" type="bar">
+                
+            </graph>
+        </field>
+    </record>
+
+    <!--Calendar View-->
+    <record id="school_model_view_calendar" model="ir.ui.view">
+        <field name="name">Calendar View</field>
+        <field name="model">yzo.school.model</field>
+        <field name="arch" type="xml">
+            <calendar string="" date_start="date_of_birth" hide_time="True" event_open_popup="true" 
+            quick_add="false" color="address" mode="month">
+                <!--quick_add=true default-->
+                <field name="name" />
+                <field name="date_of_birth" />
+                <field name="phone_no"/>
+                <field name="address" />
+            </calendar>
+        </field>
+    </record>
+
+    <!--Search View-->
+    <record id="school_model_view_search" model="ir.ui.view">
+        <field name="name">Search View</field>
+        <field name="model">yzo.school.model</field>
+        <field name="arch" type="xml">
+            <search string="Search for:">
+                <field name="roll_no" />
+                <field name="name" />
+                <field name="father_name" />
+                <field name="date_of_birth" />
+                <field name="phone_no" />
+                <field name="address" />
+                <field name="role" />
+                <field name="state" />
+                <separator/>
+                <!-- <filter name="all" string="All" domain="['|',('role', '=', 'student'),('state', '=', 'new')]" />  -->
+                <filter name="all" string="All" domain="[('role', '=', 'student'),('state', '=', 'new')]" /> <!--default &(and)-->
+                <separator/>
+                <filter name="inActive" string="Archived" domain="[('state', '=', 'old')]" />
+                <!-- <group name="group" string="Group By:" expand="0"> -->
+                    <filter name="role" string="Role" domain="[]" context="{'group_by': 'role'}" />
+                    <separator/>
+                    <filter name="state" string="State" domain="[]" context="{'group_by': 'state'}" />
+                    <separator/>
+                    <filter name="birth" string="Date of Birth" domain="[]" 
+                    context="{'group_by': 'date_of_birth'}" />
+                <!-- </group> -->
+            </search>
+        </field>
+    </record>
+
+    <!--Tree View-->
+    <record id="school_model_view_tree" model="ir.ui.view">
+        <field name="name">School Tree</field>
+        <field name="model">yzo.school.model</field>
+        <field name="arch" type="xml">
+            <tree string="" expand="0">
+                <field name="roll_no" />
+                <field name="name" />
+                <field name="father_name" />
+                <field name="date_of_birth" width="300"/>
+                <field name="phone_no" optional="hide" />
+                <field name="address" />
+                <!-- <field name="subj_id" /> -->
+                <!-- <field name="subj_ids" /> -->
+                <field name="role" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <!--Form View-->
+    <record id="school_model_view_form" model="ir.ui.view">
+        <field name="name">School View</field>
+        <field name="model">yzo.school.model</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                    <button name="%(yzo_school.action_report_exam_wizard)d" string="Student Exam Report" type="action" class="btn-primary" data-hotkey="q" 
+                    attrs="{'invisible':['|','|',('role','=','teacher'),('state','=','old'),('state','=','new')]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="old,new,current" clickable="1"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="avatar" widget="image" class="oe_left oe_avatar"/>
+                            <field name="roll_no" attrs="{'invisible':[('role','=','teacher')]}"/>
+                            <field name="name" required="True" /> 
+                            <field name="father_name" required="True" />    
+                        </group> 
+                        <group>
+                            <field name="date_of_birth" optional="show"/>
+                            <field name="phone_no" required="True" />
+                            <field name="role" widget="selection" required="True" />                           
+                        </group> 
+                        <!-- <group>
+                            <field name="subj_ids" widget="many2many_tags" />
+                        </group> -->
+                        <group>
+                            <field name="address" />
+                        </group> 
+                    </group>   
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--Action-->
+    <record id="model_slist_action" model="ir.actions.act_window">
+        <field name="name">Student List</field>
+        <field name="res_model">yzo.school.model</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('role','=','student')]</field>
+            
+    </record>
+
+    <record id="model_tlist_action" model="ir.actions.act_window">
+        <field name="name">Teacher List</field>
+        <field name="res_model">yzo.school.model</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('role','=','teacher')]</field>
+        
+    </record>
+  
+    <record id="model_stu_action" model="ir.actions.act_window">
+        <field name="name">Student or Teacher?</field>
+        <field name="res_model">yzo.school.model</field>
+        <field name="view_mode">tree,calendar,form,graph,kanban,pivot</field>
+
+    </record>
+
+    <!--Menu-->
+    <menuitem
+        id="school_root_menu"
+        name="My School"
+        sequence="10"/>
+        <menuitem
+            id="stu_sub_menu"
+            name="My School"
+            action="model_stu_action"
+            parent="school_root_menu"
+            sequence="9"/>
+        <menuitem
+            id="tlist_sub_menu"
+            name="Teacher List"
+            action="model_tlist_action"
+            parent="stu_sub_menu"
+            sequence="10"/>
+        <menuitem
+            id="slist_sub_menu"
+            name="Student List"
+            action="model_slist_action"
+            parent="stu_sub_menu"
+            sequence="10"/>
+        <!-- <menuitem
+            id="menu_reporting"
+            name="Reporting"
+            parent="school_root_menu"
+            sequence="10"/> -->
+        
+        
+
+</odoo>

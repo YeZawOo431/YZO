@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="exam_view_tree" model="ir.ui.view">
+        <field name="name">Tree View</field>
+        <field name="model">yzo.exam.model</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="subj_id" string="Subject Name: " />
+                <!-- <field name="stu_id" /> -->
+                <field name="teacher_id" string="Teacher: "/>
+                <field name="child_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+     <record id="exam_view_form" model="ir.ui.view">
+        <field name="name">Exam View</field>
+        <field name="model">yzo.exam.model</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="subj_id" string="Subject Name: " />
+                        </group>
+                        <group>
+                            <field name="teacher_id" string="Teacher: " domain="[('role','=','teacher'),('state','=','current')]"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Exam Marks" name="exam">
+                            <field name="child_ids" confirm="Is He/She a current student?" >
+                                <tree editable="bottom">
+                                    <field name="stu_id" 
+                                    domain="[('role','=','student'),('state','=','current')]" />
+                                    <field name="score"/>
+                                    <field name="status" />
+                                </tree>
+                                <form>
+                                    <group>
+                                        <group>
+                                            <field name="stu_id" 
+                                            domain="[('role','=','student'),('state','=','current')]"
+                                            />
+                                            <!-- <button name="stuid" confirm="Current?" string="Yes" type="object" class="oe_highlight"/> -->
+                                            <!-- </field> -->
+                                        </group>
+                                        <group>
+                                            <field name="score"/>
+                                        </group>
+                                        <group>
+                                            <field name="status" />
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record> 
+
+    <!-- Action View-->
+    <record id="model_exam_action" model="ir.actions.act_window">
+        <field name="name">Exam Marks</field>
+        <field name="res_model">yzo.exam.model</field>
+        <field name="view_mode">tree,form</field>
+        
+    </record>
+
+    <!-- menu -->
+    <menuitem
+        id="exam_root_menu"
+        name="Exam"
+        action="model_exam_action"
+        parent="school_root_menu"
+        sequence="10"/>
+
+</odoo>

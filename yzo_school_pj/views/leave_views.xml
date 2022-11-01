@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="leave_action" model="ir.actions.act_window">
+        <field name="name">Student Leave Request</field>
+        <field name="res_model">school.leave</field>
+        <field name="view_mode">tree,form</field>
+
+    </record>
+
+    <menuitem
+        id="menu_leave"
+        name="Leave Request"
+        action="roll_call_action"
+        parent="attendance_menu"
+        sequence="10"/>
+
+</odoo>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Form View-->
+    <record id="subj_view_form" model="ir.ui.view">
+        <field name="name">Subject Form</field>
+        <field name="model">yzo.subj.model</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <!-- <field name="record" /> -->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- action -->
+    <record id="model_subj_action" model="ir.actions.act_window">
+        <field name="name">Subject Selection</field>
+        <field name="res_model">yzo.subj.model</field>
+        <field name="view_mode">tree,form</field>
+
+    </record>
+
+    <!-- menu -->
+        <menuitem
+            id="subj_sub_menu"
+            name="Subject"
+            action="model_subj_action"
+            parent="school_root_menu"
+            sequence="10"/>   
+
+</odoo>

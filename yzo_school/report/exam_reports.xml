@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="report_exam__report_card" model="ir.actions.report">
+        <field name="name">Exam Report Card</field>
+        <field name="model">yzo.school.model</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">yzo_school.exam__report_card</field>
+        <field name="report_file">yzo_school.exam__report_card</field>
+        <!-- <field name="print_report_name">'Report Card - %s' % (object.name)</field> -->
+        <field name="binding_model_id" ref="model_yzo_school_model"/>
+    </record>
+
+
+    <template id="exam__report_card">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Exam Report</h2>
+                        <p>This object's name is <span t-field="o.name"/></p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

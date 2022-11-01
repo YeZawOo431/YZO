@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Section Tree View-->
+    <record id="view__section_pj_tree" model="ir.ui.view">
+        <field name="name">view.section.pj.tree</field>
+        <field name="model">section.pj</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="section_name" />
+                <field name="teacher_id" />
+                <field name="section_ids" />
+            </tree>
+        </field>
+    </record>
+
+    <!--Section Form View-->
+    <record id="view__section_pj_form" model="ir.ui.view">
+        <field name="name">view.section.pj.form</field>
+        <field name="model">section.pj</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="section_name" placeholder="Enter section name..."/>
+                        </group>
+                        <group>
+                            <field name="teacher_id" domain="[('teacher_role','=','head')]"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="choose_std" string="Choose Students...">
+                            <field name="section_ids">
+                                <tree editable="bottom">
+                                    <field name="roll_no" readonly="1" />
+                                    <field name="student_id" domain="[('role','=','student')]" />
+                                </tree>
+                                <form>
+                                    <group>
+                                        <group>
+                                            <field name="roll_no" /> 
+                                        </group>
+                                        <group>
+                                            <field name="student_id" />                   
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--Action-->
+    <record id="action_section" model="ir.actions.act_window">
+        <field name="name">Sections</field>
+        <field name="res_model">section.pj</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a section! 
+            </p>
+        </field>
+    </record>
+
+    <!--Menu-->
+    <menuitem
+        id="menu_section"
+        name="Section"
+        action="action_section"
+        parent="menu_school_root"
+        sequence="10"/>
+
+</odoo>

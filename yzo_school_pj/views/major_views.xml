@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Subject Tree View-->
+    <record id="view_school_major_tree" model="ir.ui.view">
+        <field name="name">view.school.major.tree</field>
+        <field name="model">school.major</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="author" />
+                <field name="edition"/>
+                <field name="publisher"/>
+                <field name="teacher_id" />
+            </tree>
+        </field>
+    </record>
+
+    <!--Subject Form View-->
+    <record id="view_school_major_form" model="ir.ui.view">
+        <field name="name">view.school.major.form</field>
+        <field name="model">school.major</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" required="True" 
+                            placeholder="Enter your subject..." string="Subject:"/>
+                        </group>
+                        <group>
+                            <field name="teacher_id" string="Subject Teacher:"
+                            domain="[('teacher_role','=','teacher'),('role','=','teacher')]"/>
+                        </group>
+                        <group>
+                            <field name="author" string="Author:"/>
+                            <field name="edition" string="Edition:"/>
+                            <field name="publisher" string="Publisher:"/>
+                        </group>
+
+
+                    </group>
+                    
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--action-->
+    <record id="action_school_major" model="ir.actions.act_window">
+        <field name="name">Subjects</field>
+        <field name="res_model">school.major</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create subjects!
+            </p>
+        </field>
+    </record>
+    
+    
+
+    <!--Menu-->
+    <menuitem
+        id="menu_major"
+        name="Subjects"
+        action="action_school_major"
+        parent="menu_school"
+        sequence="11"/>   <!-- parent = root menu --> 
+        
+
+</odoo>

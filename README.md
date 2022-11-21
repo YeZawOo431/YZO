@@ -1,2 +1,1 @@
-# YZO
-Odoo Development
+# Team-B
